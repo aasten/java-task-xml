@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
   targetNamespace="http://www.example.com/Ingredients"
-  xmlns:tns="http://www.example.com/Ingredients">
+  xmlns:tns="http://www.example.com/Ingredients"
+  xmlns:ms="http://www.example.com/Mass">
 
-  <include schemaLocation="mass.xsd" />
+  <import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
 
   <complexType name="ChocolateCandyIngredients">
     <complexContent>
@@ -11,7 +12,10 @@
     </complexContent>
   </complexType>
 
-  <complexType name="NonChocolateCandyIngredients" ref="tns:BaseCandyIngredients">
+  <complexType name="NonChocolateCandyIngredients" >
+    <complexContent>
+      <extension base="tns:BaseCandyIngredients" />
+    </complexContent>
   </complexType>
 
   <!-- <simpleType name="ForceMgMassUnit">
@@ -22,14 +26,18 @@
 
   <!-- Overriding MassValue to use only "mg" from enumerated values -->
   <complexType name="ForcedMgMassValue">
-    <restriction base="MassValue"> <!--type got from inclusion-->
-      <attribute name="unit" type="tns:MassUnit" use="required" fixed="mg"/>
-      <attribute name="value">
-        <restriction base="decimal">
-          <fractionDigits value="1"/>
-        </restriction>
-      </attribute>
-    </restriction>
+    <complexContent>
+      <restriction base="ms:MassValue"> <!--type got from inclusion-->
+        <attribute name="unit" type="ms:MassUnit" use="required" fixed="mg"/>
+        <attribute name="value">
+          <simpleType>
+            <restriction base="decimal">
+              <fractionDigits value="1"/>
+            </restriction>
+          </simpleType>
+        </attribute>
+      </restriction>
+    </complexContent>
   </complexType>
 
   <complexType name="BaseCandyIngredients">

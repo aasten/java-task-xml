@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
   targetNamespace="http://www.example.com/Candy"
-	xmlns:tns="http://www.example.com/Candy"
+  xmlns:tns="http://www.example.com/Candy"
+  xmlns:ms="http://www.example.com/Mass"
   xmlns:ingr="http://www.example.com/Ingredients">
 
   <!-- venetian blind alike -->
 
-  <import namespace="http://www.example.com/Ingredients" schemaLocation="ingedients.xsd" />
+  <import namespace="http://www.example.com/Ingredients" schemaLocation="ingredients.xsd" />
 
-  <include schemaLocation="mass.xsd" />
+  <import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
 
 
   <complexType name="NutritionalValue">
     <!-- not a strict order -->
     <all>
-      <element name="proteins" type="MassValue"/>
-      <element name="fats" type="MassValue"/>
-      <element name="carbohydrates" type="MassValue"/>
+      <element name="proteins" type="ms:MassValue"/>
+      <element name="fats" type="ms:MassValue"/>
+      <element name="carbohydrates" type="ms:MassValue"/>
     </all>
   </complexType>
 
@@ -49,15 +50,15 @@
           </simpleType>
         </element>
 
-        <element name="ingredients" type="ingr:Ingredients"/>
+        <element name="ingredients" type="ingr:BaseCandyIngredients"/>
 
-        <element name="nutritionalValue" type="NutritionalValue"/>
+        <element name="nutritionalValue" type="tns:NutritionalValue"/>
 
         <element name="vendor" type="string"/>
 
       </sequence>
     </complexType>
-
+  </element>
 
 
 </schema>
