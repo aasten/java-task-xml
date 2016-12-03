@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.com/Ingredients"
+	xmlns:tns="http://www.example.com/Ingredients">
+
+<complexType name="MassValue">
+  <attribute name="unit" type="tns:MassUnit" use="required"/>
+  <attribute name="value">
+    <restriction base="decimal">
+      <fractionDigits value="1"/>
+    </restriction>
+  </attribute>
+</complexType>
+
+<simpleType name="MassUnit">
+  <restriction base="string">
+    <enumeration value="pound"/>
+    <enumeration value="gr"/>
+    <enumeration value="kg"/>
+    <enumeration value="mg"/>
+  </restriction>
+</simpleType>
+
+</schema>

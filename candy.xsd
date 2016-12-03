@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.com/Candy"
+	xmlns:tns="http://www.example.com/Candy"
+  xmlns:ingr="http://www.example.com/Ingredients">
+
+  <!-- venetian blind alike -->
+
+  <import namespace="http://www.example.com/Ingredients" schemaLocation="ingedients.xsd" />
+
+  <include schemaLocation="mass.xsd" />
+
+
+  <complexType name="NutritionalValue">
+    <!-- not a strict order -->
+    <all>
+      <element name="proteins" type="MassValue"/>
+      <element name="fats" type="MassValue"/>
+      <element name="carbohydrates" type="MassValue"/>
+    </all>
+  </complexType>
+
+
+
+  <element name="candy">
+    <complexType>
+      <sequence>
+        <!-- strict order -->
+        <element name="name" type="string"/>
+
+        <element name="calorific">
+          <simpleType>
+            <restriction base="decimal">
+              <totalDigits value="4"/>
+              <fractionDigits value="1"/>
+              <minInclusive value="50"/>
+              <maxInclusive value="1000"/>
+            </restriction>
+          </simpleType>
+        </element>
+
+        <element name="type">
+          <simpleType>
+            <restriction base="string">
+              <enumeration value="caramel"/>
+              <enumeration value="toffee"/>
+              <enumeration value="chocolate"/>
+            </restriction>
+          </simpleType>
+        </element>
+
+        <element name="ingredients" type="ingr:Ingredients"/>
+
+        <element name="nutritionalValue" type="NutritionalValue"/>
+
+        <element name="vendor" type="string"/>
+
+      </sequence>
+    </complexType>
+
+
+
+</schema>
