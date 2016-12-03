@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-  targetNamespace="http://www.example.com/Ingredients"
-  xmlns:tns="http://www.example.com/Ingredients"
-  xmlns:ms="http://www.example.com/Mass">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/Ingredients"
+	xmlns:tns="http://www.example.com/Ingredients" xmlns:ms="http://www.example.com/Mass">
 
-  <import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
+	<import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
 
-  <complexType name="ChocolateCandyIngredients">
-    <complexContent>
-      <extension base="tns:BaseCandyIngredients" />
-    </complexContent>
-  </complexType>
+	<complexType name="BaseCandyIngredients">
+		<sequence>
+			<element name="water" />
+			<element name="sugar" type="tns:ForcedMgMassValue" />
+			<element name="fructose" type="tns:ForcedMgMassValue" />
+			<element name="vanilin" type="tns:ForcedMgMassValue" />
+		</sequence>
+	</complexType>
 
-  <complexType name="NonChocolateCandyIngredients" >
-    <complexContent>
-      <extension base="tns:BaseCandyIngredients" />
-    </complexContent>
-  </complexType>
+	<complexType name="ChocolateCandyIngredients">
+		<complexContent>
+			<extension base="tns:BaseCandyIngredients">
+				<sequence>
+					<element name="chocolateKind" minOccurs="1" maxOccurs="1">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="dark" />
+								<enumeration value="white" />
+								<enumeration value="milk" />
+								<enumeration value="green" />
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
 
-  <!-- <simpleType name="ForceMgMassUnit">
-      <restriction base="MassUnit">
-        <enumeration value="mg" />
-      </restriction>
-  </simpleType> -->
+	<complexType name="NonChocolateCandyIngredients">
+		<complexContent>
+			<extension base="tns:BaseCandyIngredients" />
+		</complexContent>
+	</complexType>
 
-  <!-- Overriding MassValue to use only "mg" from enumerated values -->
-  <complexType name="ForcedMgMassValue">
-    <complexContent>
-      <restriction base="ms:MassValue"> <!--type got from inclusion-->
-        <attribute name="unit" use="required">
-        <simpleType>
-        <restriction base="ms:MassUnit">
-        	<enumeration value="mg" />
-        </restriction>
-        </simpleType>
-        </attribute>
-      </restriction>
-    </complexContent>
-  </complexType>
 
-  <complexType name="BaseCandyIngredients">
-    <all>
-      <element name="water" />
-      <element name="sugar" type="tns:ForcedMgMassValue" />
-      <element name="fructose" type="tns:ForcedMgMassValue" />
-      <element name="vanilin" type="tns:ForcedMgMassValue" />
-    </all>
-  </complexType>
+	<!-- Overriding MassValue to use only "mg" from enumerated values -->
+	<complexType name="ForcedMgMassValue">
+		<complexContent>
+			<restriction base="ms:MassValue"> <!--type got from inclusion -->
+				<attribute name="unit" type="ms:MassUnit" use="required"
+					fixed="mg">
+				</attribute>
+			</restriction>
+		</complexContent>
+	</complexType>
 
 
 </schema>

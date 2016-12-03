@@ -5,7 +5,7 @@
   xmlns:ms="http://www.example.com/Mass"
   xmlns:ingr="http://www.example.com/Ingredients">
 
-  <!-- venetian blind alike -->
+  <!-- venetian blind like -->
 
   <import namespace="http://www.example.com/Ingredients" schemaLocation="ingredients.xsd" />
 
