@@ -28,13 +28,12 @@
   <complexType name="ForcedMgMassValue">
     <complexContent>
       <restriction base="ms:MassValue"> <!--type got from inclusion-->
-        <attribute name="unit" type="ms:MassUnit" use="required" fixed="mg"/>
-        <attribute name="value">
-          <simpleType>
-            <restriction base="decimal">
-              <fractionDigits value="1"/>
-            </restriction>
-          </simpleType>
+        <attribute name="unit" use="required">
+        <simpleType>
+        <restriction base="ms:MassUnit">
+        	<enumeration value="mg" />
+        </restriction>
+        </simpleType>
         </attribute>
       </restriction>
     </complexContent>
