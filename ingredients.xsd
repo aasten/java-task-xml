@@ -7,25 +7,36 @@
 	<complexType name="BaseCandyIngredients">
 		<sequence>
 			<element name="water" />
-			<element name="sugar" type="tns:ForcedMgMassValue" />
-			<element name="fructose" type="tns:ForcedMgMassValue" />
+			<choice>
+				<element name="sugar" type="tns:ForcedMgMassValue" />
+				<element name="fructose" type="tns:ForcedMgMassValue" />
+		  </choice>
 			<element name="vanilin" type="tns:ForcedMgMassValue" />
 		</sequence>
 	</complexType>
+
+	<simpleType name="ChocolateKind">
+		<restriction base="string">
+			<enumeration value="dark" />
+			<enumeration value="white" />
+			<enumeration value="milk" />
+			<enumeration value="green" />
+		</restriction>
+	</simpleType>
 
 	<complexType name="ChocolateCandyIngredients">
 		<complexContent>
 			<extension base="tns:BaseCandyIngredients">
 				<sequence>
-					<element name="chocolateKind" minOccurs="1" maxOccurs="1">
-						<simpleType>
-							<restriction base="string">
-								<enumeration value="dark" />
-								<enumeration value="white" />
-								<enumeration value="milk" />
-								<enumeration value="green" />
-							</restriction>
-						</simpleType>
+					<element name="chocolateKind" type="tns:ChocolateKind" minOccurs="1" maxOccurs="1">
+						<!-- <simpleType> -->
+						<!-- <restriction base="string"> -->
+						<!-- <enumeration value="dark" /> -->
+						<!-- <enumeration value="white" /> -->
+						<!-- <enumeration value="milk" /> -->
+						<!-- <enumeration value="green" /> -->
+						<!-- </restriction> -->
+						<!-- </simpleType> -->
 					</element>
 				</sequence>
 			</extension>

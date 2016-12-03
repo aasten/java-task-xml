@@ -1,64 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-  targetNamespace="http://www.example.com/Candy"
-  xmlns:tns="http://www.example.com/Candy"
-  xmlns:ms="http://www.example.com/Mass"
-  xmlns:ingr="http://www.example.com/Ingredients">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/Candy"
+	xmlns:tns="http://www.example.com/Candy" xmlns:ms="http://www.example.com/Mass"
+	xmlns:ingr="http://www.example.com/Ingredients">
 
-  <!-- venetian blind like -->
+	<!-- venetian blind like -->
 
-  <import namespace="http://www.example.com/Ingredients" schemaLocation="ingredients.xsd" />
+	<import namespace="http://www.example.com/Ingredients"
+		schemaLocation="ingredients.xsd" />
 
-  <import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
-
-
-  <complexType name="NutritionalValue">
-    <!-- not a strict order -->
-    <all>
-      <element name="proteins" type="ms:MassValue"/>
-      <element name="fats" type="ms:MassValue"/>
-      <element name="carbohydrates" type="ms:MassValue"/>
-    </all>
-  </complexType>
+	<import namespace="http://www.example.com/Mass" schemaLocation="mass.xsd" />
 
 
+	<complexType name="NutritionalValue">
+		<!-- not a strict order -->
+		<all>
+			<element name="proteins" type="ms:MassValue" />
+			<element name="fats" type="ms:MassValue" />
+			<element name="carbohydrates" type="ms:MassValue" />
+		</all>
+	</complexType>
 
-  <element name="candy">
-    <complexType>
-      <sequence>
-        <!-- strict order -->
-        <element name="name" type="string"/>
 
-        <element name="calorific">
-          <simpleType>
-            <restriction base="decimal">
-              <totalDigits value="4"/>
-              <fractionDigits value="1"/>
-              <minInclusive value="50"/>
-              <maxInclusive value="1000"/>
-            </restriction>
-          </simpleType>
-        </element>
+	<simpleType name="CandyType">
+		<restriction base="string">
+			<enumeration value="caramel" />
+			<enumeration value="toffee" />
+			<enumeration value="chocolate" />
+		</restriction>
+	</simpleType>
 
-        <element name="type">
-          <simpleType>
-            <restriction base="string">
-              <enumeration value="caramel"/>
-              <enumeration value="toffee"/>
-              <enumeration value="chocolate"/>
-            </restriction>
-          </simpleType>
-        </element>
 
-        <element name="ingredients" type="ingr:BaseCandyIngredients"/>
 
-        <element name="nutritionalValue" type="tns:NutritionalValue"/>
+	<element name="candy">
+		<complexType>
+			<sequence>
+				<!-- strict order -->
+				<element name="name" type="string" />
 
-        <element name="vendor" type="string"/>
+				<element name="calorific">
+					<simpleType>
+						<restriction base="decimal">
+							<totalDigits value="4" />
+							<fractionDigits value="1" />
+							<minInclusive value="50" />
+							<maxInclusive value="1000" />
+						</restriction>
+					</simpleType>
+				</element>
 
-      </sequence>
-    </complexType>
-  </element>
+				<element name="type" type="tns:CandyType" />
+
+				<choice>
+					<element name="ingredientsChocolate" type="ingr:ChocolateCandyIngredients" />
+					<element name="ingredients" type="ingr:NonChocolateCandyIngredients" />
+				</choice>
+
+				<!-- <element name="type" type="tns:CandyType"> -->
+<!-- 					<simpleType> -->
+<!-- 					<restriction base="string"> -->
+<!-- 					<enumeration value="caramel"/> -->
+<!-- 					<enumeration value="toffee"/> -->
+<!-- 					<enumeration value="chocolate"/> -->
+<!-- 					</restriction> -->
+<!-- 					</simpleType> -->
+				<!-- </element> -->
+
+
+
+				<element name="nutritionalValue" type="tns:NutritionalValue" />
+
+				<element name="vendor" type="string" />
+
+			</sequence>
+		</complexType>
+	</element>
 
 
 </schema>
