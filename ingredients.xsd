@@ -6,7 +6,7 @@
 
 	<complexType name="BaseCandyIngredients">
 		<sequence>
-			<element name="water" />
+			<element name="water" type="tns:ForcedMgMassValue"/>
 			<choice>
 				<element name="sugar" type="tns:ForcedMgMassValue" />
 				<element name="fructose" type="tns:ForcedMgMassValue" />

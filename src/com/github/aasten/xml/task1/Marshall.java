@@ -25,10 +25,9 @@ public class Marshall {
         public ChocolateCandyIngredients createChocolateCandyIngredients() {
             ChocolateCandyIngredients i = new ChocolateCandyIngredients();
             i.setChocolateKind(ChocolateKind.MILK);
-            i.setWater(new Object());
-            i.setFructose(new ForcedMgMassValue());
-            i.getFructose().setUnit(MassUnit.MG);
-            i.getFructose().setValue(new BigDecimal("2200"));
+            i.setWater(new ForcedMgMassValue());
+            i.getWater().setUnit(MassUnit.MG);
+            i.getWater().setValue(new BigDecimal("2200"));
             i.setSugar(new ForcedMgMassValue());
             i.getSugar().setUnit(MassUnit.MG);
             i.getSugar().setValue(new BigDecimal("3000"));
@@ -67,7 +66,7 @@ public class Marshall {
         @Override
         public Candy createCandy() {
             Candy candy = new Candy();
-            candy.setCalorific(new BigDecimal("447000"));
+            candy.setCalorific(new BigDecimal("447"));
             candy.setIngredientsChocolate(ingredientsFactory.createChocolateCandyIngredients());
             candy.setName("Crasnyy babay XD");
             candy.setNutritionalValue(this.createNutritionalValue());
@@ -79,12 +78,14 @@ public class Marshall {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+//        System.setProperty("javax.xml.bind.JAXBContext", 
+//                "com.sun.xml.internal.bind.v2.ContextFactory");
         ObjectFactory factory = new SampleCandyFactory(new SampleIngredientsFactory()); 
         try {
             JAXBContext context = JAXBContext.newInstance(Candy.class);
             Marshaller m =  context.createMarshaller();
             Candy c = factory.createCandy();
-            m.marshal(c, new FileOutputStream("data/candy_marsh.xml"));
+            m.marshal(c, new FileOutputStream("candy_marsh.xml"));
             m.marshal(c, System.out);
         } catch (JAXBException e) {
             // TODO Auto-generated catch block
