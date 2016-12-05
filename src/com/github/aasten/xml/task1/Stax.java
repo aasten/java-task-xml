@@ -36,6 +36,7 @@ public class Stax {
                 for(int i = 0; i < reader.getAttributeCount(); ++i) {
                     if(reader.getLocalName().equals("water")
                             && reader.getAttributeLocalName(i).equals("value")) {
+                        // изменяем количество воды в составе
                             writer.writeAttribute(reader.getAttributeLocalName(i), 
                                     "4200");
                     } else {
