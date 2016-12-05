@@ -6,7 +6,7 @@
   <calorific>535.5</calorific>
   <type>chocolate</type>
   <ingredientsChocolate>
-    <water />
+    <water unit="mg" value="200"/>
     <sugar unit="mg" value="100" />
     <vanilin unit="mg" value="2" />
     <chocolateKind>milk</chocolateKind>
