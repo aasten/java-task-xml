@@ -34,8 +34,14 @@ public class Stax {
             public void process(XMLStreamReader reader, XMLStreamWriter writer) throws XMLStreamException {
                 writer.writeStartElement(reader.getLocalName());
                 for(int i = 0; i < reader.getAttributeCount(); ++i) {
-                    writer.writeAttribute(reader.getAttributeLocalName(i), 
-                                          reader.getAttributeValue(i));
+                    if(reader.getLocalName().equals("water")
+                            && reader.getAttributeLocalName(i).equals("value")) {
+                            writer.writeAttribute(reader.getAttributeLocalName(i), 
+                                    "4200");
+                    } else {
+                        writer.writeAttribute(reader.getAttributeLocalName(i), 
+                                              reader.getAttributeValue(i));
+                    }
                 }
             }
         };
