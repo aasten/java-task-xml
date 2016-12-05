@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:candy xmlns:ns2="http://www.example.com/Candy">
+	<name>Crasnyy babay XD</name>
+	<calorific>447</calorific>
+	<type>chocolate</type>
+	<ingredientsChocolate>
+		<water unit="mg" value="2200" />
+		<sugar unit="mg" value="3000" />
+		<vanilin unit="mg" value="30" />
+		<chocolateKind>milk</chocolateKind>
+	</ingredientsChocolate>
+	<nutritionalValue>
+		<proteins unit="gr" value="3.3" />
+		<fats unit="gr" value="21.9" />
+		<carbohydrates unit="gr" value="59.4" />
+	</nutritionalValue>
+	<vendor>Minsk is the capital of Republic of Belarus</vendor>
+</ns2:candy>
